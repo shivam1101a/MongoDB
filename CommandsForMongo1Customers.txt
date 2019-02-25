@@ -1,0 +1,21 @@
+1.db.createCollection('customers');
+db.customers.insert({fname:"manish",lname:"rana"});
+db.customers.find();
+db.customers.insert([{fname:"maneel",lname:"jain"},{fname:"manish",lname:"kumar"}]);
+db.customers.find().pretty();
+db.customers.update({lname:"rana"},{fname:"manish",lname:"rana",gender:"male"});
+db.customers.update({fname:"maneel"},{$set:{gender:"male"}});
+db.customers.update({fname:"maneel"},{$set:{age:45}});
+db.customers.update({fname:"maneel"},{$inc:{age:5}});
+db.customers.update({fname:"maneel"},{$unset:{age:1}});
+db.customers.update({fname:"prabhjot"},{fname:"prabhjot",lname:"dhaliwal"},{upsert:true});
+db.customers.update({fname:"maneel"},{$rename:{"gender":"sex"}});   
+db.customers.remove({gender:"male"},{justOne:true});
+db.customers.find({fname:"manish"});
+db.customers.find({$or:[{fname:"manish"},{fname:"maneel"}]});
+db.customers.find({gender:"male"});
+db.customers.find({age:($gt:40)}); #noDataForAge
+db.customers.find().sort({lname:1});
+db.customers.find().count();
+db.customers.find({gender:"male"}).count().limit(2);   
+db.customers.find().forEach(function(doc){print("Customer Name: "+doc.fname)});
